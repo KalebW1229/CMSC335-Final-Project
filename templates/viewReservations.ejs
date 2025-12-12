@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header><h1>Current Reservations</h1></header>
+
+    <div class="container">
+        <% if (reservations.length === 0) { %>
+            <p>No reservations yet.</p>
+        <% } else { %>
+            <table id="resTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Guests</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% reservations.forEach(r => { %>
+                        <tr>
+                            <td><%- r.name %></td>
+                            <td><%- r.date.toDateString() %></td>
+                            <td><%- r.guests %></td>
+                            <td><%- r.email %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+
+        <a class="btn" href="/">Return to Home</a>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+    background: #faf4ef;
+    color: #333
+}
+
+header {
+    background: #8b5e3c;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background: #8b5e3c;
+    color: white;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #7a4e2f;
+}
+
+/* Change list style?? */
+#menu {
+    list-style: none;
+    padding: 0;
+}
+
+#menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#resForm {
+    background: #fff7f0;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0 16px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#resTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#resTable th,
+#resTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#resTable th {
+    background: #e6d2c4;
+}
