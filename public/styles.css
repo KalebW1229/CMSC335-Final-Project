@@ -79,3 +79,26 @@ input[type="number"] {
 #resTable th {
     background: #e6d2c4;
 }
+
+.display img {
+    max-width: 600px;
+}
+
+#price {
+    font-size: 15px;
+    font-style: italic;
+}
+
+#cancelContainer input {
+    text-align: center;
+}
+
+#success {
+    color: green;
+    text-align: center;
+}
+
+#failure {
+    color: red;
+    text-align: center;
+}
