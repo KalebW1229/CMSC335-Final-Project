@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./Restuarant.js"
+    "start": "node ./Restaurant.js"
   },
   "dependencies": {
     "body-parser": "^2.2.1",
