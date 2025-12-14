@@ -111,14 +111,5 @@ app.post("/cancelReservation", (request, response) => {
     })
     .finally(() => response.render("cancelReservation", { confirm: confirm }));
 });
-// Delete later, for testing use only
-// Command Line (Portnumber) Interpreter
-process.stdin.setEncoding("utf8");
-if (process.argv.length != 3) {
-  process.stdout.write(`Usage ${process.argv[1]} portNumber\n`);
-  process.exit(1);
-} else {
-  portNumber = process.argv[2];
-  app.listen(portNumber);
-  console.log(`Web server is running at http://localhost:${portNumber}`);
-}
+
+app.listen(Number(process.env.PORT) ?? 8080);
