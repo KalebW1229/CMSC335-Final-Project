@@ -33,6 +33,7 @@ router.get("/cancelReservation", (request, response) => {
 });
 
 router.post("/cancelReservation", (request, response) => {
+  const Reservation = request.app.locals.Reservation
   let confirm;
   Reservation.deleteOne({ email: request.body.email })
     .then((result) => {
