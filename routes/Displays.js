@@ -30,11 +30,10 @@ router.get("/viewReservations", async (request, response) => {
     
     // Getting all reservations
     let reservations = await Reservation.find({});
-    console.log(reservations);
 
     response.render("viewReservations", { reservations });
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
   }
 });
 
