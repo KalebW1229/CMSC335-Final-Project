@@ -22,6 +22,7 @@ const reservationSchema = new mongoose.Schema({
 });
 
 const Reservation = mongoose.model("Reservation", reservationSchema);
+app.locals.Reservation = Reservation; // makes Reservation an app wide variable
 
 // Endpoints
 app.set("view engine", "ejs");
@@ -29,87 +30,13 @@ app.set("views", path.resolve(__dirname, "templates"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
+const changesRoute = require("./routes/Changes");
+const displaysRoute = require("./routes/Displays");
+app.use("/changes", changesRoute);
+app.use("/displays", displaysRoute);
+
 app.get("/", (request, response) => {
   response.render("index");
-});
-
-app.get("/menu", (request, response) => {
-  let coffee_img = fetch("https://coffee.alexflipnote.dev/random.json")
-    .then((resp) => {
-      if (!resp.ok) {
-        throw new Error(resp.statusText);
-      }
-      return resp.json();
-    })
-    .then((data) => {
-      let names = [
-        "Itallian",
-        "Flat Whites",
-        "Chocolate-Infused Mocha",
-        "Turkish",
-        "Irish",
-        "Cortado",
-      ];
-      let name = names[Math.floor(Math.random() * names.length)];
-      response.render("menu", { file: data.file, coffee_name: name });
-    })
-    .catch((err) => console.log(err.message));
-});
-
-app.get("/newReservation", (request, response) => {
-  response.render("newReservation");
-});
-
-app.post("/processReservation", async (request, response) => {
-  try {
-    // Creating new reservation with given parameters
-    await Reservation.create({
-      name: request.body.name,
-      date: request.body.date,
-      guests: request.body.guests,
-      email: request.body.email,
-    });
-
-    // Add functionality for showing the reservation that's been added (res.send to template)
-    response.render("processReservation", {
-      name: request.body.name,
-      date: request.body.date,
-      guests: request.body.guests,
-      email: request.body.email,
-    });
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-app.get("/viewReservations", async (request, response) => {
-  try {
-    // Getting all reservations
-    let reservations = await Reservation.find({});
-    console.log(reservations);
-
-    response.render("viewReservations", { reservations });
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-app.get("/cancelReservation", (request, response) => {
-  response.render("cancelReservation", { confirm: "" });
-});
-
-app.post("/cancelReservation", (request, response) => {
-  let confirm;
-  Reservation.deleteOne({ email: request.body.email })
-    .then((result) => {
-      if (result.deletedCount < 1) throw new Error("Reservation Not Found");
-      confirm = '<h2 id="success">Reservation Canceled</h2>';
-    })
-    .catch((err) => {
-      console.log(err.message);
-      confirm = '<h2 id="failure">Reservation Not Found</h2>';
-    })
-    .finally(() => response.render("cancelReservation", { confirm: confirm }));
 });
 
 app.listen(Number(process.env.PORT) ?? 8080);
